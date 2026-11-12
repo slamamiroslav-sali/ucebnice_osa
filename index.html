@@ -36,17 +36,23 @@
 .target-a{color:#a3420a}.target-b{color:#7040ac}
 .target-a.current{border-color:#a3420a;background:#fff0e5}.target-b.current{border-color:#7040ac;background:#f2eaff}
 .target-chip.current::before{content:'→';font-size:.8em}
-</style></head><body><header><strong>Číselná osa · Interaktivní matematika</strong><a href="https://ucimeseit.cz/ucebnice/">← Zpět do učebnice</a></header><main class="wrap"><section id="setup" class="panel"><h1>Procvičování číselné osy</h1><p class="muted">Vyber číselný obor, typ cvičení a způsob práce. Čísla budeš umísťovat přímo na osu.</p><h2>1. Číselný obor</h2><div id="domains" class="choices"></div><h2>2. Cvičení</h2><div id="exercises" class="choices"></div><h2>3. Režim</h2><div id="modes" class="choices"></div><button class="btn" id="start">Začít cvičení</button></section><section id="game" class="panel hidden"><p class="rotate-notice" role="note">↻ Pro pohodlnější práci s číselnou osou otoč telefon na šířku.</p><div class="bar"><div id="meta" class="tag"></div><button class="btn secondary" id="back">Změnit nastavení</button></div><div class="progress"><div id="progress"></div></div><h1 id="question"></h1><p id="instruction" class="muted"></p><div id="target" class="number" aria-live="polite" aria-atomic="true"></div><details class="axis-tools" open><summary>Upravit osu / vymazat bod</summary><div class="axiscontrols"><button class="btn secondary" id="panLeft" title="Posunout osu doleva">← Vlevo</button><button class="btn secondary" id="zoomIn" title="Přiblížit">+ Přiblížit</button><button class="btn secondary" id="zoomOut" title="Oddálit">− Oddálit</button><button class="btn secondary" id="panRight" title="Posunout osu doprava">Vpravo →</button><button class="btn secondary" id="resetView">Obnovit osu</button><button class="btn secondary" id="clearPoint">Vymazat bod</button><span class="zoominfo" id="zoomInfo"></span></div></details><div id="axis" class="axisbox"></div><p class="hint">Klikni nebo klepni na osu. Šipky označují pokračování číselné osy oběma směry. Vyznačený úsek je pouze její část.</p><div id="compareArea" class="hidden"><div id="comparison" class="comparison"></div><p class="muted" style="text-align:center">Vyber správné znaménko mezi čísly:</p><div class="signs"><button class="sign" data-sign="<">&lt;</button><button class="sign" data-sign="=">=</button><button class="sign" data-sign=">">&gt;</button></div></div><div id="feedback" class="feedback hidden" role="status"></div><div class="steps"><button class="btn" id="check">Zkontrolovat</button><button class="btn hidden" id="next">Další úloha →</button></div></section><section id="results" class="panel hidden"><h1>Výsledky testování</h1><div class="score" id="score"></div><p id="summary"></p><div id="mistakes"></div><div class="steps"><button class="btn" id="again">Nový test</button><button class="btn secondary" id="newsettings">Změnit nastavení</button></div></section></main><footer>Výuková aplikace · Číselná osa · Učíme se IT</footer><script>
+
+.axis-point:not(.locked),.axis-point:not(.locked) *{cursor:grab;touch-action:none;-webkit-touch-callout:none;user-select:none}
+.axis-point .point-label{pointer-events:all}
+.axisbox svg.dragging-point,.axisbox svg.dragging-point .axis-point{cursor:grabbing}
+.axisbox svg.dragging-point .point-dot{stroke:#172d40;stroke-width:3}
+</style></head><body><header><strong>Číselná osa · Interaktivní matematika</strong><a href="https://ucimeseit.cz/ucebnice/">← Zpět do učebnice</a></header><main class="wrap"><section id="setup" class="panel"><h1>Procvičování číselné osy</h1><p class="muted">Vyber číselný obor, typ cvičení a způsob práce. Čísla budeš umísťovat přímo na osu.</p><h2>1. Číselný obor</h2><div id="domains" class="choices"></div><h2>2. Cvičení</h2><div id="exercises" class="choices"></div><h2>3. Režim</h2><div id="modes" class="choices"></div><button class="btn" id="start">Začít cvičení</button></section><section id="game" class="panel hidden"><p class="rotate-notice" role="note">↻ Pro pohodlnější práci s číselnou osou otoč telefon na šířku.</p><div class="bar"><div id="meta" class="tag"></div><button class="btn secondary" id="back">Změnit nastavení</button></div><div class="progress"><div id="progress"></div></div><h1 id="question"></h1><p id="instruction" class="muted"></p><div id="target" class="number" aria-live="polite" aria-atomic="true"></div><details class="axis-tools" open><summary>Upravit osu / vymazat bod</summary><div class="axiscontrols"><button class="btn secondary" id="panLeft" title="Posunout osu doleva">← Vlevo</button><button class="btn secondary" id="zoomIn" title="Přiblížit">+ Přiblížit</button><button class="btn secondary" id="zoomOut" title="Oddálit">− Oddálit</button><button class="btn secondary" id="panRight" title="Posunout osu doprava">Vpravo →</button><button class="btn secondary" id="resetView">Obnovit osu</button><button class="btn secondary" id="clearPoint">Vymazat bod</button><span class="zoominfo" id="zoomInfo"></span></div></details><div id="axis" class="axisbox"></div><p class="hint">Klikni nebo klepni na osu. Umístěný bod přidrž a tažením přesuň. Šipky označují pokračování číselné osy oběma směry. Vyznačený úsek je pouze její část.</p><div id="compareArea" class="hidden"><div id="comparison" class="comparison"></div><p class="muted" style="text-align:center">Vyber správné znaménko mezi čísly:</p><div class="signs"><button class="sign" data-sign="<">&lt;</button><button class="sign" data-sign="=">=</button><button class="sign" data-sign=">">&gt;</button></div></div><div id="feedback" class="feedback hidden" role="status"></div><div class="steps"><button class="btn" id="check">Zkontrolovat</button><button class="btn hidden" id="next">Další úloha →</button></div></section><section id="results" class="panel hidden"><h1>Výsledky testování</h1><div class="score" id="score"></div><p id="summary"></p><div id="mistakes"></div><div class="steps"><button class="btn" id="again">Nový test</button><button class="btn secondary" id="newsettings">Změnit nastavení</button></div></section></main><footer>Výuková aplikace · Číselná osa · Učíme se IT</footer><script>
 'use strict';
 const domains=[['natural','Přirozená čísla s nulou','Od 0 do 100, po jednotkách'],['integer','Celá čísla','Od −100 do 100, včetně záporných'],['decimal','Kladná desetinná čísla','Od 0 do 10, desetiny a setiny'],['rational','Racionální čísla','Od −10 do 10, zlomky i desetinná čísla']];
 const exercises=[['place','Umísťování čísel','Umísti zadané číslo na číselnou osu'],['compare','Porovnávání čísel','Umísti dvě čísla a porovnej je znaménkem']];
 const modes=[['practice','Nekonečné procvičování','Libovolný počet úloh se zpětnou vazbou'],['test','Testování','10 úloh, závěrečný počet správných a chybných']];
-let view=null,initialView=null,automaticView=true;let cfg={domain:'natural',exercise:'place',mode:'practice'},index=0,correct=0,wrong=[],task=null,selected=[],sign=null,checked=false;
+let view=null,initialView=null,automaticView=true,cancelAxisGesture=null;let cfg={domain:'natural',exercise:'place',mode:'practice'},index=0,correct=0,wrong=[],task=null,selected=[],sign=null,checked=false;
 const $=id=>document.getElementById(id);const rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1));const fmt=n=>Number(n.toFixed(5)).toLocaleString('cs-CZ',{maximumFractionDigits:4});
 function renderChoices(id,data,key){$(id).innerHTML='';data.forEach(([v,title,desc])=>{let b=document.createElement('button');b.className='choice'+(cfg[key]===v?' active':'');b.innerHTML='<b>'+title+'</b><small>'+desc+'</small>';b.onclick=()=>{cfg[key]=v;renderChoices(id,data,key)};$(id).append(b)})}function setup(){renderChoices('domains',domains,'domain');renderChoices('exercises',exercises,'exercise');renderChoices('modes',modes,'mode')};setup();
 function makeNumber(){let d=cfg.domain;if(d==='natural'){let n=rnd(0,100);return {v:n,label:String(n)}}if(d==='integer'){let n=rnd(-100,100);return {v:n,label:fmt(n)}}if(d==='decimal'){let scale=Math.random()<.65?10:100,n=rnd(0,10*scale);return {v:n/scale,label:fmt(n/scale),precision:1/scale}}if(Math.random()<.55){let scale=Math.random()<.6?10:100,n=rnd(-10*scale,10*scale);return {v:n/scale,label:fmt(n/scale),precision:1/scale}}let den=Math.random()<.5?10:100,num=rnd(-10*den,10*den),v=num/den;return {v,label:num+'/'+den,precision:1/den}}
 function limits(){return cfg.domain==='natural'?[0,100]:cfg.domain==='integer'?[-100,100]:cfg.domain==='decimal'?[0,10]:[-10,10]}
 function newTask(){
+ if(cancelAxisGesture)cancelAxisGesture();
  let a=makeNumber(),b=makeNumber();if(cfg.exercise==='compare'&&Math.random()<.18)b={...a};else if(cfg.exercise==='compare'){let tries=0;while(Math.abs(a.v-b.v)<1e-7&&tries++<15)b=makeNumber()}
  task={nums:cfg.exercise==='place'?[a]:[a,b]};
  // The finest decimal precision in this task determines the target tick size.
@@ -86,6 +92,7 @@ function renderTarget(){
  });
 }
 function changeView(factor,move){
+ if(cancelAxisGesture)cancelAxisGesture();
  if(!view)return;
  automaticView=false;
  const [min,max]=limits(),oldWidth=view.end-view.start,full=max-min;
@@ -102,11 +109,12 @@ function niceStep(range){
  return allowed.find(x=>x>=target-1e-9)||allowed[allowed.length-1];
 }
 function drawAxis(){
+ if(cancelAxisGesture)cancelAxisGesture();
  const axisStyle=getComputedStyle($('axis'));
  const axisWidth=$('axis').clientWidth-parseFloat(axisStyle.paddingLeft)-parseFloat(axisStyle.paddingRight)||960;
  const W=Math.max(360,Math.min(960,axisWidth)),H=170,L=48,R=W-48,Y=75,range=view.end-view.start,px=v=>L+(v-view.start)/range*(R-L),ns='http://www.w3.org/2000/svg';
  let svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',`Číselná osa od ${fmt(view.start)} do ${fmt(view.end)}. Kliknutím umísti číslo.`);
- function el(tag,attrs,t){let e=document.createElementNS(ns,tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(t!==undefined)e.textContent=t;svg.append(e);return e}
+ function el(tag,attrs,t,parent=svg){let e=document.createElementNS(ns,tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(t!==undefined)e.textContent=t;parent.append(e);return e}
  el('line',{x1:24,y1:Y,x2:W-24,y2:Y,stroke:'#193d61','stroke-width':4,'stroke-linecap':'round'});
  el('path',{d:`M 24 ${Y} L 43 ${Y-10} L 43 ${Y+10} Z`,fill:'#193d61'});el('path',{d:`M ${W-24} ${Y} L ${W-43} ${Y-10} L ${W-43} ${Y+10} Z`,fill:'#193d61'});
  // Hodnota jednoho dílku je pevná podle přesnosti úlohy.
@@ -130,13 +138,96 @@ function drawAxis(){
   if(Math.abs(v-refIndex*reference)<1e-7 && refIndex%labelEvery===0)
    el('text',{x,y:Y+38,'text-anchor':'middle','font-size':22,'font-weight':700,fill:'#193d61'},fmt(v));
  }
- selected.forEach((v,i)=>{if(v<view.start||v>view.end)return;let x=px(v),c=i===0?'#df6c24':'#8554bf';el('line',{x1:x,x2:x,y1:Y-43,y2:Y-17,stroke:c,'stroke-width':3});el('circle',{cx:x,cy:Y,r:9,fill:c,stroke:'white','stroke-width':2});el('text',{x,y:Y-53,'text-anchor':'middle','font-size':18,'font-weight':800,fill:c},cfg.exercise==='compare'?(i===0?'A':'B'):'●')});
+ // Keep the background hit area below the movable points.
+ el('rect',{x:L-12,y:Y-45,width:R-L+24,height:100,fill:'transparent',style:'cursor:crosshair'});
+ const markers=new Map();
+ function updateMarker(i){
+  const m=markers.get(i),v=selected[i],x=px(v);
+  if(!m)return;
+  m.group.setAttribute('transform',`translate(${x} ${Y})`);
+  m.label.textContent=(cfg.exercise==='compare'?(i===0?'A: ':'B: '):'')+fmt(v);
+  const half=Math.min(W/2-8,m.label.textContent.length*5.8);
+  m.label.setAttribute('x',Math.max(half+8,Math.min(W-half-8,x))-x);
+  m.group.setAttribute('aria-label',(cfg.exercise==='compare'?(i===0?'Bod A: ':'Bod B: '):'Bod: ')+fmt(v)+(checked?'':'. Přidržením a tažením přesuň.'));
+ }
+ selected.forEach((v,i)=>{
+  if(v<view.start||v>view.end)return;
+  const color=i===0?'#b64a0d':'#7040ac',labelY=cfg.exercise==='compare'&&i===1?-31:-53;
+  const group=el('g',{'data-point-index':i,class:'axis-point'+(checked?' locked':''),role:'graphics-symbol'});
+  el('line',{x1:0,x2:0,y1:labelY+8,y2:-17,stroke:color,'stroke-width':3},undefined,group);
+  el('circle',{cx:0,cy:0,r:24,fill:'transparent',class:'point-hit'},undefined,group);
+  const dot=el('circle',{cx:0,cy:0,r:9,fill:color,stroke:'white','stroke-width':2,class:'point-dot'},undefined,group);
+  const label=el('text',{x:0,y:labelY,'text-anchor':'middle','font-size':18,'font-weight':800,fill:color,stroke:'#f6faff','stroke-width':4,'paint-order':'stroke',class:'point-label'},'',group);
+  markers.set(i,{group,dot,label});updateMarker(i);
+ });
  if(checked)task.nums.forEach((n,i)=>{if(n.v<view.start||n.v>view.end)return;let x=px(n.v);el('circle',{cx:x,cy:Y,r:7,fill:'#15985a',stroke:'white','stroke-width':2});el('text',{x,y:Y+73,'text-anchor':'middle','font-size':17,'font-weight':700,fill:'#147347'},(task.nums.length===2?(i===0?'A: ':'B: '):'')+n.label)});
- let hit=el('rect',{x:L-12,y:Y-45,width:R-L+24,height:100,fill:'transparent',style:'cursor:crosshair'});
- hit.addEventListener('click',ev=>{if(checked)return;if(cfg.exercise==='compare'&&selected.length>=task.nums.length)return;let p=svg.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;let point=p.matrixTransform(svg.getScreenCTM().inverse());let raw=view.start+(point.x-L)/(R-L)*range;raw=Math.max(view.start,Math.min(view.end,raw));
- // Precision is based on zoom level, not the initial wide overview.
- let snap=cfg.domain==='natural'||cfg.domain==='integer'?1:(cfg.domain==='decimal'||cfg.domain==='rational')?task.precision:.1;
- let v=Math.round(raw/snap)*snap;v=Math.max(view.start,Math.min(view.end,v));if(cfg.exercise==='place')selected=[Number(v.toFixed(7))];else selected.push(Number(v.toFixed(7)));fitSmartView();drawAxis();updatePrompt()});
+ const snap=whole?1:task.precision;
+ function pointerValue(ev){
+  const p=svg.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;
+  const point=p.matrixTransform(svg.getScreenCTM().inverse());
+  const raw=view.start+(point.x-L)/(R-L)*range;
+  const low=Math.ceil((view.start-1e-9)/snap)*snap,high=Math.floor((view.end+1e-9)/snap)*snap;
+  return Number(Math.max(low,Math.min(high,Math.round(raw/snap)*snap)).toFixed(7));
+ }
+ let gesture=null,suppressClick=false;
+ function cleanGesture(restore){
+  if(!gesture)return;
+  const g=gesture;gesture=null;clearTimeout(g.timer);cancelAxisGesture=null;
+  if(restore&&g.dragging){selected[g.index]=g.original;automaticView=g.automaticView}
+  svg.classList.remove('dragging-point');
+  if(svg.hasPointerCapture(g.pointerId))svg.releasePointerCapture(g.pointerId);
+ }
+ svg.addEventListener('pointerdown',ev=>{
+  if(checked||gesture||!ev.isPrimary||ev.button!==0)return;
+  suppressClick=false;
+  const marker=ev.target.closest('[data-point-index]');
+  if(!marker)return;
+  suppressClick=true;
+  const index=Number(marker.dataset.pointIndex);
+  gesture={index,pointerId:ev.pointerId,x:ev.clientX,y:ev.clientY,original:selected[index],automaticView,dragging:false};
+  cancelAxisGesture=()=>cleanGesture(true);
+  svg.setPointerCapture(ev.pointerId);
+  gesture.timer=setTimeout(()=>{
+   if(!gesture)return;
+   gesture.dragging=true;automaticView=false;
+   svg.classList.add('dragging-point');
+   markers.get(index).dot.setAttribute('r',13);
+  },300);
+ });
+ svg.addEventListener('pointermove',ev=>{
+  if(!gesture||ev.pointerId!==gesture.pointerId)return;
+  if(!gesture.dragging){
+   if(Math.hypot(ev.clientX-gesture.x,ev.clientY-gesture.y)>10)cleanGesture(false);
+   return;
+  }
+  ev.preventDefault();selected[gesture.index]=pointerValue(ev);updateMarker(gesture.index);
+ });
+ svg.addEventListener('pointerup',ev=>{
+  if(!gesture||ev.pointerId!==gesture.pointerId)return;
+  const wasDragging=gesture.dragging;
+  if(!wasDragging)suppressClick=false;
+  if(wasDragging)selected[gesture.index]=pointerValue(ev);
+  cleanGesture(false);
+  // Keep this SVG through the generated click, then redraw on the next view change.
+  markers.forEach((m,i)=>{m.dot.setAttribute('r',9);updateMarker(i)});
+  if(wasDragging)updatePrompt();
+ });
+ function cancelPointer(ev){
+  if(!gesture||ev.pointerId!==gesture.pointerId)return;
+  cleanGesture(true);markers.forEach((m,i)=>{m.dot.setAttribute('r',9);updateMarker(i)});
+ }
+ svg.addEventListener('pointercancel',cancelPointer);
+ svg.addEventListener('lostpointercapture',cancelPointer);
+ svg.addEventListener('contextmenu',ev=>{if(ev.target.closest('[data-point-index]')||gesture)ev.preventDefault()});
+ svg.addEventListener('click',ev=>{
+  if(suppressClick){suppressClick=false;return}
+  if(checked)return;
+  if(ev.target.closest('[data-point-index]')&&cfg.exercise==='place')return;
+  if(cfg.exercise==='compare'&&selected.length>=task.nums.length)return;
+  const v=pointerValue(ev);
+  if(cfg.exercise==='place')selected=[v];else selected.push(v);
+  fitSmartView();drawAxis();updatePrompt();
+ });
  $('axis').replaceChildren(svg);$('zoomInfo').textContent=`Zobrazeno: ${fmt(view.start)} až ${fmt(view.end)} · dílek ${fmt(minor)}`+((cfg.domain==='decimal'||cfg.domain==='rational')&&minor>task.precision+1e-8?` · Přibliž pro dílky po ${fmt(task.precision)}`:'');
 }
 function updatePrompt(){renderTarget();if(cfg.exercise==='compare'){let n=selected.length;$('instruction').textContent=n===0?'Nejprve umísti na osu číslo A.':n===1?'Nyní umísti na osu číslo B. Potom vyber znaménko.':'Obě čísla jsou umístěna. Vyber znaménko a zkontroluj odpověď.'}else $('instruction').textContent=selected.length?'Bod je umístěn. Zkontroluj odpověď.':'Klikni na místo, kam patří zadané číslo.';$('check').disabled=checked||selected.length<task.nums.length||(cfg.exercise==='compare'&&!sign);$('clearPoint').disabled=checked||selected.length===0}
@@ -144,5 +235,5 @@ function showTask(){newTask();$('setup').classList.add('hidden');$('results').cl
 function tolerance(){return cfg.domain==='natural'||cfg.domain==='integer'?.001:(cfg.domain==='decimal'||cfg.domain==='rational')?.00001:.0085}function evaluate(){if(checked)return;let positions=selected.every((v,i)=>Math.abs(v-task.nums[i].v)<=tolerance()),relation=task.nums.length===2?(task.nums[0].v<task.nums[1].v?'<':task.nums[0].v>task.nums[1].v?'>':'='):null,ok=positions&&(relation===null||sign===relation);checked=true;renderTarget();if(ok)correct++;else wrong.push({question:task.nums.map(n=>n.label).join(' a '),positions,relation,answer:selected.map(fmt).join(', '),sign});let msg=ok?'Správně!':`Nesprávně. Správné umístění: ${task.nums.map(n=>n.label).join(' a ')}.${relation?' Správné znaménko: '+relation+'.':''}`;$('feedback').textContent=msg;$('feedback').className='feedback '+(ok?'good':'bad');$('check').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=cfg.mode==='test'&&index===9?'Zobrazit výsledky':'Další úloha →';drawAxis()}
 function results(){ $('game').classList.add('hidden');$('results').classList.remove('hidden');$('score').textContent=correct+' / 10 správně';$('summary').textContent=`Správné odpovědi: ${correct}. Chybné odpovědi: ${10-correct}. Každá úloha je za 1 bod; u porovnávání musí být správně oba body i znaménko.`;$('mistakes').innerHTML=wrong.length?'<h2>Úlohy k zopakování</h2>':'';wrong.forEach(w=>{let p=document.createElement('p');p.textContent=`Číslo/čísla: ${w.question}. ${w.positions?'Umístění bylo správné.':'Umístění nebylo správné.'} ${w.relation?'Správné znaménko: '+w.relation+'.':''}`;$('mistakes').append(p)})}
 $('zoomIn').onclick=()=>changeView(.5,0);$('zoomOut').onclick=()=>changeView(2,0);$('panLeft').onclick=()=>changeView(1,-.35);$('panRight').onclick=()=>changeView(1,.35);$('resetView').onclick=()=>{if(!initialView)return;automaticView=true;view={...initialView};fitSmartView();drawAxis();updatePrompt()};$('clearPoint').onclick=()=>{if(checked||!selected.length)return;selected.pop();fitSmartView();drawAxis();updatePrompt()};$('start').onclick=()=>{index=0;correct=0;wrong=[];showTask()};$('check').onclick=evaluate;$('next').onclick=()=>{index++;if(cfg.mode==='test'&&index>=10)results();else showTask()};$('back').onclick=()=>{$('game').classList.add('hidden');$('setup').classList.remove('hidden')};$('again').onclick=()=>{index=0;correct=0;wrong=[];showTask()};$('newsettings').onclick=()=>{$('results').classList.add('hidden');$('setup').classList.remove('hidden')};document.querySelectorAll('.sign').forEach(b=>b.onclick=()=>{if(checked)return;sign=b.dataset.sign;document.querySelectorAll('.sign').forEach(x=>x.classList.toggle('selected',x===b));updatePrompt()});
-const axisResizeObserver=new ResizeObserver(()=>{if(view&&!$('game').classList.contains('hidden')){fitSmartView();drawAxis()}});axisResizeObserver.observe($('axis'));
+const axisResizeObserver=new ResizeObserver(()=>{if(view&&!$('game').classList.contains('hidden')&&!cancelAxisGesture){fitSmartView();drawAxis()}});axisResizeObserver.observe($('axis'));
 </script></body></html>
