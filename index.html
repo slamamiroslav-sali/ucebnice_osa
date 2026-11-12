@@ -41,7 +41,40 @@
 .axis-point .point-label{pointer-events:all}
 .axisbox svg.dragging-point,.axisbox svg.dragging-point .axis-point{cursor:grabbing}
 .axisbox svg.dragging-point .point-dot{stroke:#172d40;stroke-width:3}
-</style></head><body><header><strong>Číselná osa · Interaktivní matematika</strong><a href="https://ucimeseit.cz/ucebnice/">← Zpět do učebnice</a></header><main class="wrap"><section id="setup" class="panel"><h1>Procvičování číselné osy</h1><p class="muted">Vyber číselný obor, typ cvičení a způsob práce. Čísla budeš umísťovat přímo na osu.</p><h2>1. Číselný obor</h2><div id="domains" class="choices"></div><h2>2. Cvičení</h2><div id="exercises" class="choices"></div><h2>3. Režim</h2><div id="modes" class="choices"></div><button class="btn" id="start">Začít cvičení</button></section><section id="game" class="panel hidden"><p class="rotate-notice" role="note">↻ Pro pohodlnější práci s číselnou osou otoč telefon na šířku.</p><div class="bar"><div id="meta" class="tag"></div><button class="btn secondary" id="back">Změnit nastavení</button></div><div class="progress"><div id="progress"></div></div><h1 id="question"></h1><p id="instruction" class="muted"></p><div id="target" class="number" aria-live="polite" aria-atomic="true"></div><details class="axis-tools" open><summary>Upravit osu / vymazat bod</summary><div class="axiscontrols"><button class="btn secondary" id="panLeft" title="Posunout osu doleva">← Vlevo</button><button class="btn secondary" id="zoomIn" title="Přiblížit">+ Přiblížit</button><button class="btn secondary" id="zoomOut" title="Oddálit">− Oddálit</button><button class="btn secondary" id="panRight" title="Posunout osu doprava">Vpravo →</button><button class="btn secondary" id="resetView">Obnovit osu</button><button class="btn secondary" id="clearPoint">Vymazat bod</button><span class="zoominfo" id="zoomInfo"></span></div></details><div id="axis" class="axisbox"></div><p class="hint">Klikni nebo klepni na osu. Umístěný bod přidrž a tažením přesuň. Šipky označují pokračování číselné osy oběma směry. Vyznačený úsek je pouze její část.</p><div id="compareArea" class="hidden"><div id="comparison" class="comparison"></div><p class="muted" style="text-align:center">Vyber správné znaménko mezi čísly:</p><div class="signs"><button class="sign" data-sign="<">&lt;</button><button class="sign" data-sign="=">=</button><button class="sign" data-sign=">">&gt;</button></div></div><div id="feedback" class="feedback hidden" role="status"></div><div class="steps"><button class="btn" id="check">Zkontrolovat</button><button class="btn hidden" id="next">Další úloha →</button></div></section><section id="results" class="panel hidden"><h1>Výsledky testování</h1><div class="score" id="score"></div><p id="summary"></p><div id="mistakes"></div><div class="steps"><button class="btn" id="again">Nový test</button><button class="btn secondary" id="newsettings">Změnit nastavení</button></div></section></main><footer>Výuková aplikace · Číselná osa · Učíme se IT</footer><script>
+
+/* The axis handles taps and drags itself; vertical finger jitter must not scroll the page. */
+.axisbox,.axisbox svg{touch-action:none}
+.btn,.sign,.axis-tools>summary{touch-action:manipulation}
+.fullscreen-button{display:none}
+@media(pointer:coarse) and (max-width:1000px){.fullscreen-button:not(.hidden){display:inline-block}}
+@media(pointer:coarse) and (orientation:landscape) and (max-height:600px){
+ html:has(#game:not(.hidden)){overflow:hidden;overscroll-behavior:none}
+ body:has(#game:not(.hidden)){position:fixed;inset:0;overflow:hidden;overscroll-behavior:none}
+ body:has(#game:not(.hidden))>.wrap{
+  height:100vh;height:100svh;max-width:1050px;overflow:auto;overscroll-behavior:none;-webkit-overflow-scrolling:touch;
+  padding:4px max(6px,env(safe-area-inset-right)) 4px max(6px,env(safe-area-inset-left));
+ }
+ #game{display:grid;grid-template-columns:1fr auto 1fr;gap:4px;margin:0;padding:6px}
+ #target,#target:has(.target-chip){grid-row:1;grid-column:1/-1;font-size:1.35rem;line-height:1.2;gap:6px}
+ .target-chip{padding:1px 6px}
+ #axis{grid-row:2;grid-column:1/-1;padding:0 4px}
+ #compareArea{grid-row:3;grid-column:1;align-self:center}.signs{gap:6px;margin:0}.sign{width:52px;height:42px;font-size:1.6rem}
+ #game>.steps{grid-row:3;grid-column:2;align-items:center;justify-content:center}
+ #game>.steps .btn{min-height:42px;padding:8px 12px;font-size:.9rem}
+ #game>.bar{grid-row:3;grid-column:3;align-self:center;justify-content:flex-end;gap:4px}
+ #game>.bar .btn{min-height:36px;font-size:.75rem;padding:6px 8px}
+ #feedback{grid-row:4;grid-column:1/-1;margin:0;padding:8px 12px}
+ .axis-tools{grid-row:5;grid-column:1/-1}.axis-tools>summary{padding:5px 8px;font-size:.8rem}
+ .axiscontrols{margin:4px 0}
+ .fullscreen-button:not(.hidden){display:inline-block}
+}
+
+@media(pointer:coarse) and (orientation:landscape) and (max-height:600px) and (max-width:700px){
+ #fullscreen,#back{font-size:0!important;min-width:36px;height:36px;line-height:1;white-space:nowrap;overflow:hidden}
+ #fullscreen::before{content:'⛶';font-size:20px}
+ #back::before{content:'⚙';font-size:20px}
+}
+</style></head><body><header><strong>Číselná osa · Interaktivní matematika</strong><a href="https://ucimeseit.cz/ucebnice/">← Zpět do učebnice</a></header><main class="wrap"><section id="setup" class="panel"><h1>Procvičování číselné osy</h1><p class="muted">Vyber číselný obor, typ cvičení a způsob práce. Čísla budeš umísťovat přímo na osu.</p><h2>1. Číselný obor</h2><div id="domains" class="choices"></div><h2>2. Cvičení</h2><div id="exercises" class="choices"></div><h2>3. Režim</h2><div id="modes" class="choices"></div><button class="btn" id="start">Začít cvičení</button></section><section id="game" class="panel hidden"><p class="rotate-notice" role="note">↻ Pro pohodlnější práci s číselnou osou otoč telefon na šířku.</p><div class="bar"><div id="meta" class="tag"></div><button class="btn secondary fullscreen-button hidden" id="fullscreen" title="Celá obrazovka" type="button" aria-pressed="false">Celá obrazovka</button><button class="btn secondary" id="back" title="Změnit nastavení">Změnit nastavení</button></div><div class="progress"><div id="progress"></div></div><h1 id="question"></h1><p id="instruction" class="muted"></p><div id="target" class="number" aria-live="polite" aria-atomic="true"></div><details class="axis-tools" open><summary>Upravit osu / vymazat bod</summary><div class="axiscontrols"><button class="btn secondary" id="panLeft" title="Posunout osu doleva">← Vlevo</button><button class="btn secondary" id="zoomIn" title="Přiblížit">+ Přiblížit</button><button class="btn secondary" id="zoomOut" title="Oddálit">− Oddálit</button><button class="btn secondary" id="panRight" title="Posunout osu doprava">Vpravo →</button><button class="btn secondary" id="resetView">Obnovit osu</button><button class="btn secondary" id="clearPoint">Vymazat bod</button><span class="zoominfo" id="zoomInfo"></span></div></details><div id="axis" class="axisbox"></div><p class="hint">Klikni nebo klepni na osu. Umístěný bod přidrž a tažením přesuň. Šipky označují pokračování číselné osy oběma směry. Vyznačený úsek je pouze její část.</p><div id="compareArea" class="hidden"><div id="comparison" class="comparison"></div><p class="muted" style="text-align:center">Vyber správné znaménko mezi čísly:</p><div class="signs"><button class="sign" data-sign="<">&lt;</button><button class="sign" data-sign="=">=</button><button class="sign" data-sign=">">&gt;</button></div></div><div id="feedback" class="feedback hidden" role="status"></div><div class="steps"><button class="btn" id="check">Zkontrolovat</button><button class="btn hidden" id="next">Další úloha →</button></div></section><section id="results" class="panel hidden"><h1>Výsledky testování</h1><div class="score" id="score"></div><p id="summary"></p><div id="mistakes"></div><div class="steps"><button class="btn" id="again">Nový test</button><button class="btn secondary" id="newsettings">Změnit nastavení</button></div></section></main><footer>Výuková aplikace · Číselná osa · Učíme se IT</footer><script>
 'use strict';
 const domains=[['natural','Přirozená čísla s nulou','Od 0 do 100, po jednotkách'],['integer','Celá čísla','Od −100 do 100, včetně záporných'],['decimal','Kladná desetinná čísla','Od 0 do 10, desetiny a setiny'],['rational','Racionální čísla','Od −10 do 10, zlomky i desetinná čísla']];
 const exercises=[['place','Umísťování čísel','Umísti zadané číslo na číselnou osu'],['compare','Porovnávání čísel','Umísti dvě čísla a porovnej je znaménkem']];
@@ -112,7 +145,8 @@ function drawAxis(){
  if(cancelAxisGesture)cancelAxisGesture();
  const axisStyle=getComputedStyle($('axis'));
  const axisWidth=$('axis').clientWidth-parseFloat(axisStyle.paddingLeft)-parseFloat(axisStyle.paddingRight)||960;
- const W=Math.max(360,Math.min(960,axisWidth)),H=170,L=48,R=W-48,Y=75,range=view.end-view.start,px=v=>L+(v-view.start)/range*(R-L),ns='http://www.w3.org/2000/svg';
+ const compactLandscape=matchMedia('(pointer:coarse) and (orientation:landscape) and (max-height:600px)').matches;
+ const W=Math.max(360,Math.min(960,axisWidth)),H=compactLandscape?(innerHeight<=300?140:155):170,L=48,R=W-48,Y=compactLandscape&&innerHeight<=300?60:75,range=view.end-view.start,px=v=>L+(v-view.start)/range*(R-L),ns='http://www.w3.org/2000/svg';
  let svg=document.createElementNS(ns,'svg');svg.setAttribute('viewBox',`0 0 ${W} ${H}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',`Číselná osa od ${fmt(view.start)} do ${fmt(view.end)}. Kliknutím umísti číslo.`);
  function el(tag,attrs,t,parent=svg){let e=document.createElementNS(ns,tag);Object.entries(attrs||{}).forEach(([k,v])=>e.setAttribute(k,v));if(t!==undefined)e.textContent=t;parent.append(e);return e}
  el('line',{x1:24,y1:Y,x2:W-24,y2:Y,stroke:'#193d61','stroke-width':4,'stroke-linecap':'round'});
@@ -152,7 +186,7 @@ function drawAxis(){
  }
  selected.forEach((v,i)=>{
   if(v<view.start||v>view.end)return;
-  const color=i===0?'#b64a0d':'#7040ac',labelY=cfg.exercise==='compare'&&i===1?-31:-53;
+  const color=i===0?'#b64a0d':'#7040ac',labelY=(cfg.exercise==='compare'&&i===1?44:22)-Y;
   const group=el('g',{'data-point-index':i,class:'axis-point'+(checked?' locked':''),role:'graphics-symbol'});
   el('line',{x1:0,x2:0,y1:labelY+8,y2:-17,stroke:color,'stroke-width':3},undefined,group);
   el('circle',{cx:0,cy:0,r:24,fill:'transparent',class:'point-hit'},undefined,group);
@@ -235,5 +269,22 @@ function showTask(){newTask();$('setup').classList.add('hidden');$('results').cl
 function tolerance(){return cfg.domain==='natural'||cfg.domain==='integer'?.001:(cfg.domain==='decimal'||cfg.domain==='rational')?.00001:.0085}function evaluate(){if(checked)return;let positions=selected.every((v,i)=>Math.abs(v-task.nums[i].v)<=tolerance()),relation=task.nums.length===2?(task.nums[0].v<task.nums[1].v?'<':task.nums[0].v>task.nums[1].v?'>':'='):null,ok=positions&&(relation===null||sign===relation);checked=true;renderTarget();if(ok)correct++;else wrong.push({question:task.nums.map(n=>n.label).join(' a '),positions,relation,answer:selected.map(fmt).join(', '),sign});let msg=ok?'Správně!':`Nesprávně. Správné umístění: ${task.nums.map(n=>n.label).join(' a ')}.${relation?' Správné znaménko: '+relation+'.':''}`;$('feedback').textContent=msg;$('feedback').className='feedback '+(ok?'good':'bad');$('check').classList.add('hidden');$('next').classList.remove('hidden');$('next').textContent=cfg.mode==='test'&&index===9?'Zobrazit výsledky':'Další úloha →';drawAxis()}
 function results(){ $('game').classList.add('hidden');$('results').classList.remove('hidden');$('score').textContent=correct+' / 10 správně';$('summary').textContent=`Správné odpovědi: ${correct}. Chybné odpovědi: ${10-correct}. Každá úloha je za 1 bod; u porovnávání musí být správně oba body i znaménko.`;$('mistakes').innerHTML=wrong.length?'<h2>Úlohy k zopakování</h2>':'';wrong.forEach(w=>{let p=document.createElement('p');p.textContent=`Číslo/čísla: ${w.question}. ${w.positions?'Umístění bylo správné.':'Umístění nebylo správné.'} ${w.relation?'Správné znaménko: '+w.relation+'.':''}`;$('mistakes').append(p)})}
 $('zoomIn').onclick=()=>changeView(.5,0);$('zoomOut').onclick=()=>changeView(2,0);$('panLeft').onclick=()=>changeView(1,-.35);$('panRight').onclick=()=>changeView(1,.35);$('resetView').onclick=()=>{if(!initialView)return;automaticView=true;view={...initialView};fitSmartView();drawAxis();updatePrompt()};$('clearPoint').onclick=()=>{if(checked||!selected.length)return;selected.pop();fitSmartView();drawAxis();updatePrompt()};$('start').onclick=()=>{index=0;correct=0;wrong=[];showTask()};$('check').onclick=evaluate;$('next').onclick=()=>{index++;if(cfg.mode==='test'&&index>=10)results();else showTask()};$('back').onclick=()=>{$('game').classList.add('hidden');$('setup').classList.remove('hidden')};$('again').onclick=()=>{index=0;correct=0;wrong=[];showTask()};$('newsettings').onclick=()=>{$('results').classList.add('hidden');$('setup').classList.remove('hidden')};document.querySelectorAll('.sign').forEach(b=>b.onclick=()=>{if(checked)return;sign=b.dataset.sign;document.querySelectorAll('.sign').forEach(x=>x.classList.toggle('selected',x===b));updatePrompt()});
+// Fullscreen is opt-in because browsers require a direct user gesture.
+const fullscreenButton=$('fullscreen');
+function syncFullscreenButton(){
+ fullscreenButton.classList.toggle('hidden',!document.fullscreenEnabled);
+ fullscreenButton.textContent=document.fullscreenElement?'Ukončit celou obrazovku':'Celá obrazovka';
+ fullscreenButton.setAttribute('aria-pressed',String(Boolean(document.fullscreenElement)));
+ fullscreenButton.title=fullscreenButton.textContent;
+}
+fullscreenButton.onclick=async()=>{
+ try{
+  if(document.fullscreenElement)await document.exitFullscreen();
+  else await document.documentElement.requestFullscreen();
+ }catch(error){
+  fullscreenButton.textContent='Celá obrazovka není dostupná';
+ }
+};
+document.addEventListener('fullscreenchange',syncFullscreenButton);syncFullscreenButton();
 const axisResizeObserver=new ResizeObserver(()=>{if(view&&!$('game').classList.contains('hidden')&&!cancelAxisGesture){fitSmartView();drawAxis()}});axisResizeObserver.observe($('axis'));
 </script></body></html>
