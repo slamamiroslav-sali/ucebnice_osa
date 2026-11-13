@@ -1,0 +1,4 @@
+Zálohujte původní admin.php, index.php, style.css a menu.json. Nahrajte přiložené soubory do /ucebnice/. config.php ponechte původní.
+V administraci klikněte na Upravit a nastavte Skupinu. Můžete vybrat existující nebo napsat vlastní. Prázdná skupina = Nezařazené. Šipky přesouvají položky uvnitř skupiny. Skupiny jsou seřazeny podle prvního výskytu v seznamu.
+Pokud se nabídka od zaslání podkladů změnila, NEPŘEPISUJTE menu.json: nahrajte pouze PHP a CSS a skupiny přiřaďte ručně.
+Po nahrání obnovte stránku pomocí Ctrl+F5.
