@@ -1,0 +1,93 @@
+[
+    {
+        "title": "Souřadný systém 1",
+        "slug": "souradnysystem",
+        "description": "Procvičování souřadnic a technického kreslení.",
+        "icon": "⌖",
+        "category": "Matematika"
+    },
+    {
+        "title": "Souřadný systém 2",
+        "slug": "souradnysystem2",
+        "description": "Další úlohy pro práci se souřadnicemi.",
+        "icon": "⊞",
+        "category": "Matematika"
+    },
+    {
+        "title": "Wi-Fi simulátor",
+        "slug": "wifisimulator",
+        "description": "Nastavení routeru a síťových parametrů.",
+        "icon": "◉",
+        "category": "Informatika"
+    },
+    {
+        "title": "Wi-Fi simulátor 2",
+        "slug": "wifisimulator2",
+        "description": "Interaktivní procvičování konfigurace sítě.",
+        "icon": "⌁",
+        "category": "Informatika"
+    },
+    {
+        "title": "Práce s daty 1",
+        "slug": "pracesdaty",
+        "description": "",
+        "icon": "⌘",
+        "category": "Informatika"
+    },
+    {
+        "title": "Tvorba WWW",
+        "slug": "www1",
+        "description": "",
+        "icon": "⌘",
+        "category": "Informatika"
+    },
+    {
+        "title": "Databáze 1",
+        "slug": "databaze1",
+        "description": "",
+        "icon": "⌘",
+        "category": "Informatika"
+    },
+    {
+        "title": "Šifrování 1",
+        "slug": "sifrovani",
+        "description": "",
+        "icon": "⌘",
+        "category": "Informatika"
+    },
+    {
+        "title": "Informační systémy - ZOO",
+        "slug": "informacni_systemy",
+        "description": "Informační systémy",
+        "icon": "⌘",
+        "category": "Informatika"
+    },
+    {
+        "title": "Informační systémy - Knihovna",
+        "slug": "knihovna",
+        "description": "knihovna",
+        "icon": "⌘",
+        "category": "Informatika"
+    },
+    {
+        "title": "Číselná osa",
+        "slug": "ciselna_osa",
+        "description": "Znázorňování čísel na číselné ose a jejich porovnávání",
+        "icon": "⌘",
+        "category": "Matematika"
+    },
+    {
+        "title": "Firewall",
+        "slug": "firewall",
+        "description": "Firewall",
+        "icon": "⌘",
+        "category": "Informatika"
+    },
+    {
+        "title": "PHP",
+        "slug": "php",
+        "description": "PHP",
+        "icon": "⌘",
+        "category": "Informatika"
+    }
+]
