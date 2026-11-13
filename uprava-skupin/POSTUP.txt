@@ -1,4 +1,16 @@
-Zálohujte původní admin.php, index.php, style.css a menu.json. Nahrajte přiložené soubory do /ucebnice/. config.php ponechte původní.
-V administraci klikněte na Upravit a nastavte Skupinu. Můžete vybrat existující nebo napsat vlastní. Prázdná skupina = Nezařazené. Šipky přesouvají položky uvnitř skupiny. Skupiny jsou seřazeny podle prvního výskytu v seznamu.
-Pokud se nabídka od zaslání podkladů změnila, NEPŘEPISUJTE menu.json: nahrajte pouze PHP a CSS a skupiny přiřaďte ručně.
-Po nahrání obnovte stránku pomocí Ctrl+F5.
+PŘEHLEDNÁ UČEBNICE – PŘEDMĚTY A APLIKACE
+
+Úvodní stránka nyní zobrazuje pouze karty předmětů (Matematika, Informatika a další skupiny z nabídky). Aplikace jsou dostupné až po kliknutí na předmět. Odkaz „Všechny předměty“ vrací na úvodní přehled. Nové skupiny se zobrazují automaticky podle přiřazení aplikací v administraci.
+
+AKTUALIZACE JIŽ NAHRANÉ VERZE SE SKUPINAMI:
+1. Zálohujte stávající soubory index.php a style.css.
+2. Ze složky uprava-skupin nahrajte pouze index.php a style.css do /ucebnice/.
+3. Obnovte stránku pomocí Ctrl+F5. Vaše nabídka i přiřazení skupin zůstanou zachovány.
+
+PRVNÍ INSTALACE ÚPRAVY SKUPIN:
+1. Zálohujte admin.php, index.php, style.css a menu.json.
+2. Nahrajte přiložené admin.php, index.php a style.css do /ucebnice/.
+3. Pokud nabídka stále odpovídá původním 13 aplikacím, můžete nahrát i přiložené menu.json s vyplněnými skupinami. Pokud jste nabídku mezitím změnili, ponechte vlastní menu.json a skupiny přiřaďte ručně v administraci.
+4. U aplikace klikněte na Upravit, vyplňte Skupinu a uložte. Můžete vybrat existující skupinu nebo napsat novou. Prázdné skupiny jsou dostupné přes kartu Nezařazené.
+
+config.php a adresáře aplikací ponechte původní. Součástí balíčku nejsou přihlašovací údaje.
